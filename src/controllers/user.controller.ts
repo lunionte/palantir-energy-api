@@ -9,8 +9,16 @@ export class UserController {
         res.json({ data });
     }
     static async getById(req: Request, res: Response) {
-        const id = req.params.id;
+        const { id } = req.params;
         const data = await new UserService().getById(id);
+        res.json({ data });
+    }
+
+    static async update(req: Request, res: Response) {
+        const { id } = req.params;
+        const { nome, email, status } = req.body;
+        const data = await new UserService().update(id, nome, email, status as StatusFuncionario);
+
         res.json({ data });
     }
 }

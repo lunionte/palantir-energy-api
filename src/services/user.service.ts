@@ -23,4 +23,9 @@ export class UserService {
         }
         return user;
     }
+
+    async update(id: string, email: string, nome: string, status: StatusFuncionario) {
+        const data = await this.userRepository.update(id, nome, email, status);
+        return data;
+    }
 }
