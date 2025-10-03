@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { StatusFuncionario } from "../models/user.model";
 const prisma = new PrismaClient();
 
 export class UserRepository {
@@ -6,6 +7,12 @@ export class UserRepository {
         const data = await prisma.funcionario.findMany();
         return data;
     }
+
+    async getByStatus(status: StatusFuncionario) {
+        const data = await prisma.funcionario.findMany({ where: { status } });
+        return data;
+    }
+
     async getById(id: string) {
         const data = await prisma.funcionario.findUnique({
             where: {
