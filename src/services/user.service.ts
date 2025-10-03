@@ -1,3 +1,4 @@
+import { StatusFuncionario } from "../models/user.model";
 import { UserRepository } from "../repositories/user.repository";
 
 export class UserService {
@@ -6,10 +7,15 @@ export class UserService {
         this.userRepository = new UserRepository();
     }
 
-    async getAll() {
+    async getAll(status?: StatusFuncionario) {
+        if (status) {
+            const data = await this.userRepository.getByStatus(status);
+            return data;
+        }
         const data = await this.userRepository.getAll();
         return data;
     }
+
     async getById(id: string) {
         const user = await this.userRepository.getById(id);
         if (!user) {
