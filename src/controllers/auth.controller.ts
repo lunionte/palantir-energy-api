@@ -13,4 +13,12 @@ export class AuthController {
         const data = await new AuthService().logar(email, password);
         res.status(201).json({ data });
     }
+
+    static async updatePassword(req: Request, res: Response) {
+        const id = req.user.id;
+        const { newPassword } = req.body;
+        const data = await new AuthService().updatePassword(id, newPassword);
+
+        res.json({ data });
+    }
 }
