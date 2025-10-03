@@ -26,6 +26,29 @@ export class UserRepository {
         const data = await prisma.funcionario.findUnique({ where: { email } });
         return data;
     }
+
+    async update(id: string, nome: string, email: string, status: StatusFuncionario) {
+        const data = await prisma.funcionario.update({
+            where: { id },
+            data: {
+                nome,
+                email,
+
+                status,
+            },
+        });
+        return data;
+    }
+
+    async updatePassword(id: string, senhaHash: string) {
+        const data = await prisma.funcionario.update({
+            where: { id },
+            data: {
+                senhaHash,
+            },
+        });
+        return data;
+    }
     async save(nome: string, email: string, senhaHash: string) {
         const data = await prisma.funcionario.create({
             data: {
